@@ -42,10 +42,23 @@ HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历�
 	Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
 	
 	简单的可以理解为需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。
-		比如 git add A.js 
-			 git add B.js 
-	
-	
+		比如 首先在工作区目录新建两个文件 执行下面两个命令
+			git add A.js 
+			git add B.js 
+		执行命令后 暂存区会增加 A B两个文件  使用git commit -m “add A B”  命令后 暂存区会清空 一次性提交暂存区的文件到分支master
+
+第一次修改 -> git add -> 第二次修改 -> git commit
+Git管理的是修改，当你用git add命令后，在工作区的第一次修改被放入暂存区，
+	准备提交，但是，在工作区的第二次修改并没有放入暂存区，所以，
+	git commit只负责把暂存区的修改提交了，也就是第一次的修改被提交了，第二次的修改不会被提交。
+提交后，用git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别		
+							git diff HEAD -- fileName 
+
+当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- fileName。
+											git checkout -- fileName // 把文件在工作区的修改全部撤销
+当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD fileName，第二步用命令 git checkout -- fileName.
+
+已经提交了不合适的修改到版本库时，想要撤销本次提交，可以使用 git reset --hard HEAD^ 或者 git reset --hard commit_id .不过前提是没有推送到远程库。
 	
 	
 	
