@@ -57,15 +57,31 @@ Git管理的是修改，当你用git add命令后，在工作区的第一次修�
 当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- fileName。
 											git checkout -- fileName // 把文件在工作区的修改全部撤销
 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD fileName，第二步用命令 git checkout -- fileName.
-
+											git reset HEAD fileName
+											git checkout -- fileName
 已经提交了不合适的修改到版本库时，想要撤销本次提交，可以使用 git reset --hard HEAD^ 或者 git reset --hard commit_id .不过前提是没有推送到远程库。
-	
-	
-	
-	
-	
-	
-	
+											git reset --hard commit_id
+
+远程仓库
+	只要注册一个GitHub账号，就可以免费获得Git远程仓库。
+		第1步：	创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，
+				如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：ssh-keygen -t rsa -C "youremail@example.com"
+			可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以告诉别人
+		第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+		第3步：创建一个新的仓库（learnGit），使用 git remote add origin git@github.com:xxxx/learnGit.git 命令把本地和远程仓库管理在一起 
+											git remote add origin git@github.com:tanxin/learnGit.git
+		第4步： 本地和远程仓库关联后，使用 git push -u origin master 命令把本地内容推送到远程仓库中
+											git push -u origin master //第一次推送
+											git push origin master // 第二次以后的推送
+			由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，
+				还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+		第5步： 在github上新创建一个项目，创建项目时记住勾选Initialize this repository with a README，这样GitHub会自动为我们创建一个README.md文件。
+			远程库准备好后，使用命令git clone克隆一个本地库
+											git clone git@github.com:tanxin/others.git // 把新建的仓库克隆到本地
+			Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+			
+											
+		
 	
 	
 	
