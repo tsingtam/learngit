@@ -79,9 +79,22 @@ Git管理的是修改，当你用git add命令后，在工作区的第一次修�
 			远程库准备好后，使用命令git clone克隆一个本地库
 											git clone git@github.com:tanxin/others.git // 把新建的仓库克隆到本地
 			Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
-			
-											
-		
+												
+在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
+每次提交，master分支都会向前移动一步，这样，随着你不断提交，master分支的线也越来越长.
+当我们创建新的分支，例如dev时，Git新建了一个指针叫dev，指向master相同的提交，再把HEAD指向dev，就表示当前分支在dev上.
+			git checkout -b dev // 创建dev 分支 并切换到dev分支 
+			git checkout -b dev 相当于 git branch dev  git checkout dev 这两条命令  先创建 再切换
+			git branch  //查看当前分支  
+Git创建一个分支很快，因为除了增加一个dev指针，改改HEAD的指向，工作区的文件都没有任何变化！
+不过，从现在开始，对工作区的修改和提交就是针对dev分支了，比如新提交一次后，dev指针往前移动一步，而master指针不变.
+			git add	fileName
+			git commit -m "des"
+在dev上的工作完成了，就可以把dev合并到master上,合并完分支后，甚至可以删除dev分支。删除dev分支就是把dev指针给删掉，删掉后，我们就剩下了一条master分支
+			git checkout master  // 切换到master分支
+			git merge dev  // 把dev分支上的内容合并到master分支上 
+			git branch -d dev //合并完成后 删除dev分支
+			git branch  // 查看分支
 	
 	
 	
